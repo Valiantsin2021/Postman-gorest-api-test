@@ -5,18 +5,13 @@ name: Newman Run
 on: [push]
   
 jobs:
-  newman:
+  build:
     runs-on: ubuntu-latest
+    container:
+      image: postman/newman
     steps:
     - name: Checkout
       uses: actions/checkout@v2
 
     - name: Run API Tests
-      id: run-newman
-      uses: anthonyvscode/newman-action@v1
-      with:
-        collection: https://www.getpostman.com/collections/c0d9a1bfd6aa5717ffd1
-        reporters: cli,htmlextra
-
-    - name: Output summary to console
-      run: echo ${{ steps.run-newman.outputs.summary }}
+      run: newman run https://www.getpostman.com/collections/c0d9a1bfd6aa5717ffd1 --reporters cli,htmlextra
