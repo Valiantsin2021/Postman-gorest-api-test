@@ -13,5 +13,8 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
+    - name: Install
+      run: npm install newman-reporter-htmlextra
+
     - name: Run API Tests
       run: newman run https://www.getpostman.com/collections/c0d9a1bfd6aa5717ffd1 --reporters cli,htmlextra
