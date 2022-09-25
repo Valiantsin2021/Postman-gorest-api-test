@@ -25,7 +25,7 @@ jobs:
       run: mkdir -p testResults
 
     - name: Run API Tests
-      run: newman run Book_api.json -r htmlextra --reporter-htmlextra-export testResults
+      run: newman run GraphQL.postman_collection.json -r htmlextra --reporter-htmlextra-export testResults
 
     - name: Output test results
       uses: actions/upload-artifact@v2
