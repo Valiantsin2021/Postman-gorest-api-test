@@ -29,6 +29,11 @@
 							"});\r",
 							"pm.test(\"Status code name has string\", function () {\r",
 							"    pm.response.to.have.status(\"OK\");\r",
+							"});\r",
+							"pm.test(\"Check keys in response\", function () {\r",
+							"for(let obj of response) {\r",
+							"        pm.expect(obj).to.have.keys(['id', 'name', 'email', 'gender', 'status'])\r",
+							"          }\r",
 							"});"
 						],
 						"type": "text/javascript"
@@ -62,9 +67,23 @@
 							"pm.test(\"Check created user name is correct\", function () {\r",
 							"    pm.expect(response.name).to.be.equal('Ondra Zbyshek');\r",
 							"});\r",
-							"pm.test(\"Check created user keys\", function () {\r",
+							"pm.test(\"Check created user keys amount\", function () {\r",
 							"    pm.expect(Object.keys(response)).to.have.length(5);\r",
-							"});"
+							"});\r",
+							"pm.test(\"Check keys names in response\", function () {\r",
+							"    pm.expect(response).to.have.keys(['id', 'name', 'email', 'gender', 'status'])\r",
+							"});\r",
+							"pm.test(\"Check created user keys and values\", function () {\r",
+							"    pm.expect(response).to.include({\r",
+							"        'name': 'Ondra Zbyshek',\r",
+							"        'email': 'asas@mail.com',\r",
+							"        'gender': 'male',\r",
+							"        'status': 'active'\r",
+							"    });\r",
+							"});\r",
+							"pm.collectionVariables.set('userName', response.name)\r",
+							"pm.collectionVariables.set('email', response.email)\r",
+							""
 						],
 						"type": "text/javascript"
 					}
@@ -92,6 +111,71 @@
 			"response": []
 		},
 		{
+			"name": "Get created user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"var response = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Content-Type is present\", function () {\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"pm.test(\"Check response's body length\", function () {\r",
+							"    pm.expect(response.length).to.eql(1);\r",
+							"});\r",
+							"pm.test(\"Check response time is less than 2000ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+							"});\r",
+							"pm.test(\"Status code name has string\", function () {\r",
+							"    pm.response.to.have.status(\"OK\");\r",
+							"});\r",
+							"pm.test(\"Check keys in response\", function () {\r",
+							"for(let obj of response) {\r",
+							"    pm.expect(obj).to.have.keys(['id', 'name', 'email', 'gender', 'status'])\r",
+							"        }\r",
+							"});\r",
+							"pm.test(\"Check the created user id\", function () {\r",
+							"    pm.expect(response[0].id).to.equal(pm.collectionVariables.get('id'));\r",
+							"});\r",
+							"pm.test(\"Check the created user name\", function () {\r",
+							"    pm.expect(response[0].name).to.equal(pm.collectionVariables.get('userName'));\r",
+							"});\r",
+							"pm.test(\"Check the created user email\", function () {\r",
+							"    pm.expect(response[0].email).to.equal(pm.collectionVariables.get('email'));\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}?name={{userName}}&email={{email}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "{{userName}}"
+						},
+						{
+							"key": "email",
+							"value": "{{email}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "PATCH user",
 			"event": [
 				{
@@ -113,7 +197,20 @@
 							"});\r",
 							"pm.test(\"Check created user keys\", function () {\r",
 							"    pm.expect(Object.keys(response)).to.have.length(5);\r",
-							"});"
+							"});\r",
+							"pm.test(\"Check keys names in response\", function () {\r",
+							"    pm.expect(response).to.have.keys(['id', 'name', 'email', 'gender', 'status'])\r",
+							"});\r",
+							"pm.test(\"Check created user keys and values\", function () {\r",
+							"    pm.expect(response).to.include({\r",
+							"        \"email\": \"sa@mail.com\",\r",
+							"        \"name\": \"Ondra Zloshek\",\r",
+							"        \"gender\": \"male\",\r",
+							"        \"status\": \"active\",\r",
+							"    });\r",
+							"});\r",
+							"pm.collectionVariables.set('patchedUserName', response.name)\r",
+							"pm.collectionVariables.set('patchedEmail', response.email)"
 						],
 						"type": "text/javascript"
 					}
@@ -148,6 +245,71 @@
 			"response": []
 		},
 		{
+			"name": "Get patched user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"var response = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Content-Type is present\", function () {\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"pm.test(\"Check response's body length\", function () {\r",
+							"    pm.expect(response.length).to.eql(1);\r",
+							"});\r",
+							"pm.test(\"Check response time is less than 2000ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+							"});\r",
+							"pm.test(\"Status code name has string\", function () {\r",
+							"    pm.response.to.have.status(\"OK\");\r",
+							"});\r",
+							"pm.test(\"Check keys in response\", function () {\r",
+							"for(let obj of response) {\r",
+							"    pm.expect(obj).to.have.keys(['id', 'name', 'email', 'gender', 'status'])\r",
+							"        }\r",
+							"});\r",
+							"pm.test(\"Check the created user id\", function () {\r",
+							"    pm.expect(response[0].id).to.equal(pm.collectionVariables.get('id'));\r",
+							"});\r",
+							"pm.test(\"Check the created user name\", function () {\r",
+							"    pm.expect(response[0].name).to.equal(pm.collectionVariables.get('patchedUserName'));\r",
+							"});\r",
+							"pm.test(\"Check the created user email\", function () {\r",
+							"    pm.expect(response[0].email).to.equal(pm.collectionVariables.get('patchedEmail'));\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}?name={{patchedUserName}}&email={{patchedEmail}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "{{patchedUserName}}"
+						},
+						{
+							"key": "email",
+							"value": "{{patchedEmail}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "DELETE user",
 			"event": [
 				{
@@ -174,6 +336,41 @@
 						}
 					}
 				},
+				"url": {
+					"raw": "{{baseUrl}}{{id}}",
+					"host": [
+						"{{baseUrl}}{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get deleted user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							"var response = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Check Content-Type is present\", function () {\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"pm.test(\"Check response length\", function () {\r",
+							"    pm.expect(response.message).to.equal(\"Resource not found\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
 				"url": {
 					"raw": "{{baseUrl}}{{id}}",
 					"host": [
@@ -272,6 +469,22 @@
 			"key": "baseUrl",
 			"value": "https://gorest.co.in/public/v2/users/",
 			"type": "string"
+		},
+		{
+			"key": "userName",
+			"value": "Ondra Zbyshek"
+		},
+		{
+			"key": "email",
+			"value": "asas@mail.com"
+		},
+		{
+			"key": "patchedUserName",
+			"value": "Ondra Zloshek"
+		},
+		{
+			"key": "patchedEmail",
+			"value": "sa@mail.com"
 		}
 	]
 }
