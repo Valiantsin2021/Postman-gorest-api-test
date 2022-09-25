@@ -262,6 +262,16 @@
 		{
 			"key": "id",
 			"value": ""
+		},
+		{
+			"key": "token",
+			"value": "a3672aea6955926bf817d58232ae42882c6eaba1d6a5a10d148482a884ff354d",
+			"type": "string"
+		},
+		{
+			"key": "baseUrl",
+			"value": "https://gorest.co.in/public/v2/users/",
+			"type": "string"
 		}
 	]
 }
