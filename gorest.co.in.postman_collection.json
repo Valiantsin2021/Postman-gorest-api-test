@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "60fb9bbe-7ca2-4c2d-9f77-e20f12adbc0a",
-		"name": "GraphQL",
+		"name": "gorest.co.in",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "19372436"
 	},
@@ -18,8 +18,11 @@
 							"});\r",
 							"var response = pm.response.json();\r",
 							"\r",
-							"pm.test(\"Content-Type is present\", function () {\r",
-							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"pm.test(\"'x-xss-protection' header is present and has value '0'\", function () {\r",
+							"    pm.response.to.have.header(\"x-xss-protection\", '0');\r",
+							"});\r",
+							"pm.test(\"'x-permitted-cross-domain-policies' header is present and has value 'none'\", function () {\r",
+							"    pm.response.to.have.header(\"x-permitted-cross-domain-policies\", 'none');\r",
 							"});\r",
 							"pm.test(\"Check response's body length\", function () {\r",
 							"    pm.expect(response.length).to.eql(10);\r",
@@ -27,7 +30,7 @@
 							"pm.test(\"Check response time is less than 2000ms\", function () {\r",
 							"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
 							"});\r",
-							"pm.test(\"Status code name has string\", function () {\r",
+							"pm.test(\"Status code message is 'OK'\", function () {\r",
 							"    pm.response.to.have.status(\"OK\");\r",
 							"});\r",
 							"pm.test(\"Check keys in response\", function () {\r",
@@ -461,11 +464,6 @@
 			"value": ""
 		},
 		{
-			"key": "token",
-			"value": "a3672aea6955926bf817d58232ae42882c6eaba1d6a5a10d148482a884ff354d",
-			"type": "string"
-		},
-		{
 			"key": "baseUrl",
 			"value": "https://gorest.co.in/public/v2/users/",
 			"type": "string"
@@ -485,6 +483,11 @@
 		{
 			"key": "patchedEmail",
 			"value": "sa@mail.com"
+		},
+		{
+			"key": "newUser",
+			"value": "",
+			"type": "string"
 		}
 	]
 }
