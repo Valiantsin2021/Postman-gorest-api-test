@@ -28,7 +28,7 @@ jobs:
       run: newman run gorest.co.in.postman_collection.json --environment gorest.co.in.postman_environment.json -r htmlextra --reporter-htmlextra-export testResults/index.html
 
     - name: Output test results
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: RunReports
         path: testResults
