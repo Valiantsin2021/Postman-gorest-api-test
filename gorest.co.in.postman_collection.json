@@ -3,429 +3,799 @@
 		"_postman_id": "60fb9bbe-7ca2-4c2d-9f77-e20f12adbc0a",
 		"name": "gorest.co.in",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "19372436"
+		"_exporter_id": "19372436",
+		"_collection_link": "https://www.postman.com/valiantsinlutchanka2021/workspace/my-workspace/collection/19372436-60fb9bbe-7ca2-4c2d-9f77-e20f12adbc0a?action=share&source=collection_link&creator=19372436"
 	},
 	"item": [
 		{
-			"name": "Get users",
-			"event": [
+			"name": "New Folder1",
+			"item": [
 				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
-							"});\r",
-							"var response = pm.response.json();\r",
-							"\r",
-							"pm.test(\"'x-xss-protection' header is present and has value '0'\", function () {\r",
-							"    pm.response.to.have.header(\"x-xss-protection\", '0');\r",
-							"});\r",
-							"pm.test(\"'x-permitted-cross-domain-policies' header is present and has value 'none'\", function () {\r",
-							"    pm.response.to.have.header(\"x-permitted-cross-domain-policies\", 'none');\r",
-							"});\r",
-							"pm.test(\"Check response's body length\", function () {\r",
-							"    pm.expect(response.length).to.eql(10);\r",
-							"});\r",
-							"pm.test(\"Check response time is less than 2000ms\", function () {\r",
-							"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
-							"});\r",
-							"pm.test(\"Status code message is 'OK'\", function () {\r",
-							"    pm.response.to.have.status(\"OK\");\r",
-							"});\r",
-							"pm.test(\"Check keys in response\", function () {\r",
-							"for(let obj of response) {\r",
-							"        pm.expect(obj).to.have.keys(['id', 'name', 'email', 'gender', 'status'])\r",
-							"          }\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{baseUrl}}",
-					"host": [
-						"{{baseUrl}}"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "POST user",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 201\", function () {\r",
-							"    pm.response.to.have.status(201);\r",
-							"});\r",
-							"var response = pm.response.json();\r",
-							"pm.collectionVariables.set('id', response.id)\r",
-							"pm.test(\"Check created user name is correct\", function () {\r",
-							"    pm.expect(response.name).to.be.equal('Ondra Zbyshek');\r",
-							"});\r",
-							"pm.test(\"Check created user keys amount\", function () {\r",
-							"    pm.expect(Object.keys(response)).to.have.length(5);\r",
-							"});\r",
-							"pm.test(\"Check keys names in response\", function () {\r",
-							"    pm.expect(response).to.have.keys(['id', 'name', 'email', 'gender', 'status'])\r",
-							"});\r",
-							"pm.test(\"Check created user keys and values\", function () {\r",
-							"    pm.expect(response).to.include({\r",
-							"        'name': 'Ondra Zbyshek',\r",
-							"        'email': 'asas@mail.com',\r",
-							"        'gender': 'male',\r",
-							"        'status': 'active'\r",
-							"    });\r",
-							"});\r",
-							"pm.collectionVariables.set('userName', response.name)\r",
-							"pm.collectionVariables.set('email', response.email)\r",
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Ondra Zbyshek\",\r\n    \"email\": \"asas@mail.com\",\r\n    \"gender\": \"male\",\r\n    \"status\": \"active\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{baseUrl}}",
-					"host": [
-						"{{baseUrl}}"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Get created user",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
-							"});\r",
-							"var response = pm.response.json();\r",
-							"\r",
-							"pm.test(\"Content-Type is present\", function () {\r",
-							"    pm.response.to.have.header(\"Content-Type\");\r",
-							"});\r",
-							"pm.test(\"Check response's body length\", function () {\r",
-							"    pm.expect(response.length).to.eql(1);\r",
-							"});\r",
-							"pm.test(\"Check response time is less than 2000ms\", function () {\r",
-							"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
-							"});\r",
-							"pm.test(\"Status code name has string\", function () {\r",
-							"    pm.response.to.have.status(\"OK\");\r",
-							"});\r",
-							"pm.test(\"Check keys in response\", function () {\r",
-							"for(let obj of response) {\r",
-							"    pm.expect(obj).to.have.keys(['id', 'name', 'email', 'gender', 'status'])\r",
-							"        }\r",
-							"});\r",
-							"pm.test(\"Check the created user id\", function () {\r",
-							"    pm.expect(response[0].id).to.equal(pm.collectionVariables.get('id'));\r",
-							"});\r",
-							"pm.test(\"Check the created user name\", function () {\r",
-							"    pm.expect(response[0].name).to.equal(pm.collectionVariables.get('userName'));\r",
-							"});\r",
-							"pm.test(\"Check the created user email\", function () {\r",
-							"    pm.expect(response[0].email).to.equal(pm.collectionVariables.get('email'));\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{baseUrl}}?name={{userName}}&email={{email}}",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"query": [
+					"name": "Get users",
+					"event": [
 						{
-							"key": "name",
-							"value": "{{userName}}"
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const schema = {\r",
+									"  \"type\": \"array\",\r",
+									"  \"items\": {\r",
+									"    \"type\": \"object\",\r",
+									"    \"properties\": {\r",
+									"      \"id\": {\r",
+									"        \"type\": \"integer\"\r",
+									"      },\r",
+									"      \"name\": {\r",
+									"        \"type\": \"string\"\r",
+									"      },\r",
+									"      \"email\": {\r",
+									"        \"type\": \"string\"\r",
+									"      },\r",
+									"      \"gender\": {\r",
+									"        \"type\": \"string\"\r",
+									"      },\r",
+									"      \"status\": {\r",
+									"        \"type\": \"string\"\r",
+									"      }\r",
+									"    },\r",
+									"    \"required\": [\r",
+									"      \"id\",\r",
+									"      \"name\",\r",
+									"      \"email\",\r",
+									"      \"gender\",\r",
+									"      \"status\"\r",
+									"    ]\r",
+									"  }\r",
+									"}\r",
+									"pm.variables.set(\"schema\", schema)\r",
+									"const patchedName = pm.variables.replaceIn('{{$randomFullName}}')\r",
+									"const name = pm.variables.replaceIn('{{$randomFullName}}')\r",
+									"const patchedEmail = pm.variables.replaceIn('{{$randomEmail}}')\r",
+									"const email = pm.variables.replaceIn('{{$randomEmail}}')\r",
+									"const gender = 'male'\r",
+									"const patchedGender = 'female'\r",
+									"const status = 'active'\r",
+									"const patchedStatus = 'inactive'\r",
+									"\r",
+									"pm.environment.set('name', name)\r",
+									"pm.environment.set('patchedName', patchedName)\r",
+									"pm.environment.set('email', email)\r",
+									"pm.environment.set('patchedEmail', patchedEmail)\r",
+									"pm.environment.set('gender', gender)\r",
+									"pm.environment.set('patchedGender', patchedGender)\r",
+									"pm.environment.set('status', status)\r",
+									"pm.environment.set('patchedStatus', patchedStatus)"
+								],
+								"type": "text/javascript"
+							}
 						},
 						{
-							"key": "email",
-							"value": "{{email}}"
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const commonTestsRaw = pm.environment.get('commonTests')\r",
+									"eval(commonTestsRaw);\r",
+									"const chai = require('chai')\r",
+									"chai.config.truncateThreshold = 200\r",
+									"const schema = pm.variables.get('schema')\r",
+									"pm.test('Response status code is 200 or 201', function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201])\r",
+									"})\r",
+									"pm.test(\"Response has 'OK' message\", function () {\r",
+									"    pm.response.to.be.ok\r",
+									"})\r",
+									"pm.test('Response has a body', function () {\r",
+									"    pm.response.to.be.withBody\r",
+									"})\r",
+									"pm.test('Response is valid json', () => {\r",
+									"    pm.response.to.be.json\r",
+									"})\r",
+									"try {\r",
+									"    const response = pm.response.json()\r",
+									"    pm.test('Schema validation', () => {\r",
+									"        pm.response.to.have.jsonSchema(schema)\r",
+									"    })\r",
+									"    pm.test('response has all keys', () => {\r",
+									"        const keys = [\"0\", \"1\", \"2\", \"3\", \"4\", \"5\", \"6\", \"7\", \"8\", \"9\"]\r",
+									"        pm.expect(response).to.have.all.keys(keys)\r",
+									"    })\r",
+									"    response.forEach((el, i) => {\r",
+									"        pm.test(`response[${i}] has all keys`, () => {\r",
+									"            const keys = [\"id\", \"name\", \"email\", \"gender\", \"status\"]\r",
+									"            pm.expect(el).to.have.all.keys(keys)\r",
+									"        })\r",
+									"    })\r",
+									"} catch (err) {\r",
+									"    console.error(err)\r",
+									"    pm.test(\"Test failed\", () => {\r",
+									"        pm.expect.fail(JSON.stringify(err))\r",
+									"    })\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
 						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "PATCH user",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
-							"});\r",
-							"var response = pm.response.json();\r",
-							"pm.test(\"Check response email matches string\", function () {\r",
-							"    pm.expect(response.email).to.be.eq(\"sa@mail.com\");\r",
-							"});\r",
-							"pm.test(\"Check response id\", function () {\r",
-							"   pm.expect(response.id).to.be.eq(pm.collectionVariables.get('id'));\r",
-							"});\r",
-							"pm.test(\"Check response status\", function () {\r",
-							"   pm.expect(response.status).to.be.eq('active');\r",
-							"});\r",
-							"pm.test(\"Check created user keys\", function () {\r",
-							"    pm.expect(Object.keys(response)).to.have.length(5);\r",
-							"});\r",
-							"pm.test(\"Check keys names in response\", function () {\r",
-							"    pm.expect(response).to.have.keys(['id', 'name', 'email', 'gender', 'status'])\r",
-							"});\r",
-							"pm.test(\"Check created user keys and values\", function () {\r",
-							"    pm.expect(response).to.include({\r",
-							"        \"email\": \"sa@mail.com\",\r",
-							"        \"name\": \"Ondra Zloshek\",\r",
-							"        \"gender\": \"male\",\r",
-							"        \"status\": \"active\",\r",
-							"    });\r",
-							"});\r",
-							"pm.collectionVariables.set('patchedUserName', response.name)\r",
-							"pm.collectionVariables.set('patchedEmail', response.email)"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "PATCH",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Ondra Zloshek\",\r\n    \"email\": \"sa@mail.com\",\r\n    \"gender\": \"male\",\r\n    \"status\": \"active\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}",
+							"host": [
+								"{{baseUrl}}"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "{{baseUrl}}{{id}}",
-					"host": [
-						"{{baseUrl}}{{id}}"
-					],
-					"query": [
-						{
-							"key": "id",
-							"value": "3551",
-							"disabled": true
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Get patched user",
-			"event": [
 				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
-							"});\r",
-							"var response = pm.response.json();\r",
-							"\r",
-							"pm.test(\"Content-Type is present\", function () {\r",
-							"    pm.response.to.have.header(\"Content-Type\");\r",
-							"});\r",
-							"pm.test(\"Check response's body length\", function () {\r",
-							"    pm.expect(response.length).to.eql(1);\r",
-							"});\r",
-							"pm.test(\"Check response time is less than 2000ms\", function () {\r",
-							"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
-							"});\r",
-							"pm.test(\"Status code name has string\", function () {\r",
-							"    pm.response.to.have.status(\"OK\");\r",
-							"});\r",
-							"pm.test(\"Check keys in response\", function () {\r",
-							"for(let obj of response) {\r",
-							"    pm.expect(obj).to.have.keys(['id', 'name', 'email', 'gender', 'status'])\r",
-							"        }\r",
-							"});\r",
-							"pm.test(\"Check the created user id\", function () {\r",
-							"    pm.expect(response[0].id).to.equal(pm.collectionVariables.get('id'));\r",
-							"});\r",
-							"pm.test(\"Check the created user name\", function () {\r",
-							"    pm.expect(response[0].name).to.equal(pm.collectionVariables.get('patchedUserName'));\r",
-							"});\r",
-							"pm.test(\"Check the created user email\", function () {\r",
-							"    pm.expect(response[0].email).to.equal(pm.collectionVariables.get('patchedEmail'));\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{baseUrl}}?name={{patchedUserName}}&email={{patchedEmail}}",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"query": [
+					"name": "POST user",
+					"event": [
 						{
-							"key": "name",
-							"value": "{{patchedUserName}}"
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const commonTestsRaw = pm.environment.get('commonTests')\r",
+									"eval(commonTestsRaw);\r",
+									"const chai = require('chai')\r",
+									"chai.config.truncateThreshold = 200\r",
+									"const schema = pm.variables.get('schema')\r",
+									"pm.test('Response status code is 200 or 201', function () {\r",
+									"  pm.expect(pm.response.code).to.be.oneOf([200, 201])\r",
+									"})\r",
+									"pm.test(\"Response has 'Created' message\", function () {\r",
+									"  pm.expect(pm.response.status).to.eq('Created')\r",
+									"})\r",
+									"pm.test('Response has a body', function () {\r",
+									"  pm.response.to.be.withBody\r",
+									"})\r",
+									"pm.test('Response is valid json', () => {\r",
+									"  pm.response.to.be.json\r",
+									"})\r",
+									"try {\r",
+									"  const response = pm.response.json()\r",
+									"  pm.test('Schema validation', () => {\r",
+									"    pm.response.to.have.jsonSchema(schema)\r",
+									"  })\r",
+									"  pm.test('response has all keys', () => {\r",
+									"    const keys = ['id', 'name', 'email', 'gender', 'status']\r",
+									"    pm.expect(response).to.have.all.keys(keys)\r",
+									"  })\r",
+									"  pm.test('response[\"name\"] with the value: \"Micheal Batz Jr.\"', () => {\r",
+									"    pm.expect(response['name']).to.eq(pm.environment.get('name'))\r",
+									"  })\r",
+									"  pm.test('response[\"email\"] with the value: \"Carolanne.Stroman60@yahoo.com\"', () => {\r",
+									"    pm.expect(response['email']).to.eq(pm.environment.get('email'))\r",
+									"  })\r",
+									"  pm.test('response[\"gender\"] with the value: \"male\"', () => {\r",
+									"    pm.expect(response['gender']).to.eq('male')\r",
+									"  })\r",
+									"  pm.test('response[\"status\"] with the value: \"active\"', () => {\r",
+									"    pm.expect(response['status']).to.eq('active')\r",
+									"  })\r",
+									"} catch (err) {\r",
+									"  console.error(err)\r",
+									"  pm.test('Test failed', () => {\r",
+									"    pm.expect.fail(JSON.stringify(err))\r",
+									"  })\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript"
+							}
 						},
 						{
-							"key": "email",
-							"value": "{{patchedEmail}}"
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const schema = {\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"id\": {\r",
+									"      \"type\": \"integer\"\r",
+									"    },\r",
+									"    \"name\": {\r",
+									"      \"type\": \"string\"\r",
+									"    },\r",
+									"    \"email\": {\r",
+									"      \"type\": \"string\"\r",
+									"    },\r",
+									"    \"gender\": {\r",
+									"      \"type\": \"string\"\r",
+									"    },\r",
+									"    \"status\": {\r",
+									"      \"type\": \"string\"\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\r",
+									"    \"id\",\r",
+									"    \"name\",\r",
+									"    \"email\",\r",
+									"    \"gender\",\r",
+									"    \"status\"\r",
+									"  ]\r",
+									"}\r",
+									"pm.variables.set(\"schema\", schema)"
+								],
+								"type": "text/javascript"
+							}
 						}
-					]
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"{{name}}\",\r\n    \"email\": \"{{email}}\",\r\n    \"gender\": \"{{gender}}\",\r\n    \"status\": \"{{status}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}",
+							"host": [
+								"{{baseUrl}}"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		},
 		{
-			"name": "DELETE user",
-			"event": [
+			"name": "New Folder2",
+			"item": [
 				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 204\", function () {\r",
-							"    pm.response.to.have.status(204);\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
+					"name": "Get created user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"const chai = require('chai')\r",
+									"chai.config.truncateThreshold = 200\r",
+									"const schema = pm.variables.get('schema')\r",
+									"pm.test('Response status code is 200 or 201', function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201])\r",
+									"})\r",
+									"pm.test(\"Response has 'OK' message\", function () {\r",
+									"    pm.response.to.be.ok\r",
+									"})\r",
+									"pm.test('Response has a body', function () {\r",
+									"    pm.response.to.be.withBody\r",
+									"})\r",
+									"pm.test('Response is valid json', () => {\r",
+									"    pm.response.to.be.json\r",
+									"})\r",
+									"try {\r",
+									"    const response = pm.response.json()\r",
+									"    pm.test('Schema validation', () => {\r",
+									"        pm.response.to.have.jsonSchema(schema)\r",
+									"    })\r",
+									"    pm.test('response is an array', () => {\r",
+									"        pm.expect(response).to.be.an('array').and.to.have.length(1)\r",
+									"    })\r",
+									"    pm.test('response has all keys', () => {\r",
+									"        const keys = [\"0\"]\r",
+									"        pm.expect(response).to.have.all.keys(keys)\r",
+									"    })\r",
+									"    pm.test('response[0] has all keys', () => {\r",
+									"        const keys = [\"id\", \"name\", \"email\", \"gender\", \"status\"]\r",
+									"        pm.expect(response[0]).to.have.all.keys(keys)\r",
+									"    })\r",
+									"    pm.test('response[0][\"name\"] with the value: \\\"Stella Lindgren PhD\\\"', () => {\r",
+									"        pm.expect(response[0][\"name\"]).to.eq(pm.environment.get('name'))\r",
+									"    })\r",
+									"    pm.test('response[0][\"email\"] with the value: \\\"Jamison_Sawayn4@hotmail.com\\\"', () => {\r",
+									"        pm.expect(response[0][\"email\"]).to.eq(pm.environment.get('email'))\r",
+									"    })\r",
+									"    pm.test('response[0][\"gender\"] with the value: \\\"male\\\"', () => {\r",
+									"        pm.expect(response[0][\"gender\"]).to.eq(pm.environment.get('gender'))\r",
+									"    })\r",
+									"    pm.test('response[0][\"status\"] with the value: \\\"active\\\"', () => {\r",
+									"        pm.expect(response[0][\"status\"]).to.eq(pm.environment.get('status'))\r",
+									"    })\r",
+									"    pm.environment.set('id', response[0]['id'])\r",
+									"} catch (err) {\r",
+									"    console.error(err)\r",
+									"    pm.test(\"Test failed\", () => {\r",
+									"        pm.expect.fail(JSON.stringify(err))\r",
+									"    })\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"setTimeout(() => {}, 5000)\r",
+									"const schema = {\r",
+									"  \"type\": \"array\",\r",
+									"  \"items\": {\r",
+									"    \"type\": \"object\",\r",
+									"    \"properties\": {\r",
+									"      \"id\": {\r",
+									"        \"type\": \"integer\"\r",
+									"      },\r",
+									"      \"name\": {\r",
+									"        \"type\": \"string\"\r",
+									"      },\r",
+									"      \"email\": {\r",
+									"        \"type\": \"string\"\r",
+									"      },\r",
+									"      \"gender\": {\r",
+									"        \"type\": \"string\"\r",
+									"      },\r",
+									"      \"status\": {\r",
+									"        \"type\": \"string\"\r",
+									"      }\r",
+									"    },\r",
+									"    \"required\": [\r",
+									"      \"id\",\r",
+									"      \"name\",\r",
+									"      \"email\",\r",
+									"      \"gender\",\r",
+									"      \"status\"\r",
+									"    ]\r",
+									"  }\r",
+									"}\r",
+									"pm.variables.set(\"schema\", schema)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}?name={{name}}&email={{email}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "{{name}}"
+								},
+								{
+									"key": "email",
+									"value": "{{email}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PATCH user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"const chai = require('chai')\r",
+									"chai.config.truncateThreshold = 200\r",
+									"const schema = pm.variables.get('schema')\r",
+									"pm.test('Response status code is 200 or 201', function () {\r",
+									"  pm.expect(pm.response.code).to.be.oneOf([200, 201])\r",
+									"})\r",
+									"pm.test(\"Response has 'OK' message\", function () {\r",
+									"  pm.response.to.be.ok\r",
+									"})\r",
+									"pm.test('Response has a body', function () {\r",
+									"  pm.response.to.be.withBody\r",
+									"})\r",
+									"pm.test('Response is valid json', () => {\r",
+									"  pm.response.to.be.json\r",
+									"})\r",
+									"try {\r",
+									"  const response = pm.response.json()\r",
+									"  pm.test('Schema validation', () => {\r",
+									"    pm.response.to.have.jsonSchema(schema)\r",
+									"  })\r",
+									"  pm.test('response has all keys', () => {\r",
+									"    const keys = [\"email\",\"name\",\"gender\",\"status\",\"id\"]\r",
+									"    pm.expect(response).to.have.all.keys(keys)\r",
+									"  })\r",
+									"  pm.test('response[\"gender\"] with the value: \\\"female\\\"', () => {\r",
+									"    pm.expect(response[\"gender\"]).to.eq(\"female\")\r",
+									"  })\r",
+									"  pm.test('response[\"status\"] with the value: \\\"inactive\\\"', () => {\r",
+									"    pm.expect(response[\"status\"]).to.eq(\"inactive\")\r",
+									"  })\r",
+									"} catch (err) {\r",
+									"    console.error(err)\r",
+									"    pm.test(\"Test failed\", () => {\r",
+									"      pm.expect.fail(JSON.stringify(err))\r",
+									"    })\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const schema = {\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"email\": {\r",
+									"      \"type\": \"string\"\r",
+									"    },\r",
+									"    \"name\": {\r",
+									"      \"type\": \"string\"\r",
+									"    },\r",
+									"    \"gender\": {\r",
+									"      \"type\": \"string\"\r",
+									"    },\r",
+									"    \"status\": {\r",
+									"      \"type\": \"string\"\r",
+									"    },\r",
+									"    \"id\": {\r",
+									"      \"type\": \"integer\"\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\r",
+									"    \"email\",\r",
+									"    \"name\",\r",
+									"    \"gender\",\r",
+									"    \"status\",\r",
+									"    \"id\"\r",
+									"  ]\r",
+									"}\r",
+									"pm.variables.set(\"schema\", schema)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"{{patchedName}}\",\r\n    \"email\": \"{{patchedEmail}}\",\r\n    \"gender\": \"{{patchedGender}}\",\r\n    \"status\": \"{{patchedStatus}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}{{id}}",
+							"host": [
+								"{{baseUrl}}{{id}}"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "3551",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get patched user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"const chai = require('chai')\r",
+									"chai.config.truncateThreshold = 200\r",
+									"const schema = pm.variables.get('schema')\r",
+									"pm.test('Response status code is 200 or 201', function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201])\r",
+									"})\r",
+									"pm.test(\"Response has 'OK' message\", function () {\r",
+									"    pm.response.to.be.ok\r",
+									"})\r",
+									"pm.test('Response has a body', function () {\r",
+									"    pm.response.to.be.withBody\r",
+									"})\r",
+									"pm.test('Response is valid json', () => {\r",
+									"    pm.response.to.be.json\r",
+									"})\r",
+									"try {\r",
+									"    const response = pm.response.json()\r",
+									"    pm.test('Schema validation', () => {\r",
+									"        pm.response.to.have.jsonSchema(schema)\r",
+									"    })\r",
+									"    pm.test('response has all keys', () => {\r",
+									"        const keys = [\"0\"]\r",
+									"        pm.expect(response).to.have.all.keys(keys)\r",
+									"    })\r",
+									"    pm.test('response is an array', () => {\r",
+									"        pm.expect(response).to.be.an('array').and.to.have.length(1)\r",
+									"    })\r",
+									"    pm.test('response[0] has all keys', () => {\r",
+									"        const keys = [\"id\", \"name\", \"email\", \"gender\", \"status\"]\r",
+									"        pm.expect(response[0]).to.have.all.keys(keys)\r",
+									"    })\r",
+									"    pm.test('response[0][\"name\"] with the value: \\\"Hazel Graham\\\"', () => {\r",
+									"        pm.expect(response[0][\"name\"]).to.eq(pm.environment.get('patchedName'))\r",
+									"    })\r",
+									"    pm.test('response[0][\"email\"] with the value: \\\"Tommie.Schultz@gmail.com\\\"', () => {\r",
+									"        pm.expect(response[0][\"email\"]).to.eq(pm.environment.get('patchedEmail'))\r",
+									"    })\r",
+									"    pm.test('response[0][\"gender\"] with the value: \\\"female\\\"', () => {\r",
+									"        pm.expect(response[0][\"gender\"]).to.eq(pm.environment.get('patchedGender'))\r",
+									"    })\r",
+									"    pm.test('response[0][\"status\"] with the value: \\\"inactive\\\"', () => {\r",
+									"        pm.expect(response[0][\"status\"]).to.eq(pm.environment.get('patchedStatus'))\r",
+									"    })\r",
+									"    pm.environment.set('id', response[0]['id'])\r",
+									"} catch (err) {\r",
+									"    console.error(err)\r",
+									"    pm.test(\"Test failed\", () => {\r",
+									"        pm.expect.fail(JSON.stringify(err))\r",
+									"    })\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const schema = {\r",
+									"  \"type\": \"array\",\r",
+									"  \"items\": {\r",
+									"    \"type\": \"object\",\r",
+									"    \"properties\": {\r",
+									"      \"id\": {\r",
+									"        \"type\": \"integer\"\r",
+									"      },\r",
+									"      \"name\": {\r",
+									"        \"type\": \"string\"\r",
+									"      },\r",
+									"      \"email\": {\r",
+									"        \"type\": \"string\"\r",
+									"      },\r",
+									"      \"gender\": {\r",
+									"        \"type\": \"string\"\r",
+									"      },\r",
+									"      \"status\": {\r",
+									"        \"type\": \"string\"\r",
+									"      }\r",
+									"    },\r",
+									"    \"required\": [\r",
+									"      \"id\",\r",
+									"      \"name\",\r",
+									"      \"email\",\r",
+									"      \"gender\",\r",
+									"      \"status\"\r",
+									"    ]\r",
+									"  }\r",
+									"}\r",
+									"pm.variables.set(\"schema\", schema)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}?name={{patchedName}}&email={{patchedEmail}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "{{patchedName}}"
+								},
+								{
+									"key": "email",
+									"value": "{{patchedEmail}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}{{id}}",
+							"host": [
+								"{{baseUrl}}{{id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get deleted user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});\r",
+									"var response = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Check Content-Type is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"pm.test(\"Check response length\", function () {\r",
+									"    pm.expect(response.message).to.equal(\"Resource not found\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}{{id}}",
+							"host": [
+								"{{baseUrl}}{{id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get posts",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const chai = require('chai')\r",
+									"chai.config.truncateThreshold = 200\r",
+									"const schema = pm.variables.get('schema')\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"var response = pm.response.json();\r",
+									"pm.test('Schema validation', () => {\r",
+									"    pm.response.to.have.jsonSchema(schema)\r",
+									"})\r",
+									"pm.test(\"Check response's body inner objects length\", function () {\r",
+									"    response.forEach(el => pm.expect(Object.keys(el)).to.have.length(4))\r",
+									"});\r",
+									"pm.test(\"Check response's body length\", function () {\r",
+									"    pm.expect(response).to.have.length(10)\r",
+									"});\r",
+									"pm.test('Response status code is 200 or 201', function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201])\r",
+									"})\r",
+									"pm.test(\"Response has 'OK' message\", function () {\r",
+									"    pm.response.to.be.ok\r",
+									"})\r",
+									"pm.test('Response has a body', function () {\r",
+									"    pm.response.to.be.withBody\r",
+									"})\r",
+									"pm.test('Response is valid json', () => {\r",
+									"    pm.response.to.be.json\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const schema = {\r",
+									"  \"type\": \"array\",\r",
+									"  \"items\": {\r",
+									"    \"type\": \"object\",\r",
+									"    \"properties\": {\r",
+									"      \"id\": {\r",
+									"        \"type\": \"integer\"\r",
+									"      },\r",
+									"      \"user_id\": {\r",
+									"        \"type\": \"integer\"\r",
+									"      },\r",
+									"      \"title\": {\r",
+									"        \"type\": \"string\"\r",
+									"      },\r",
+									"      \"body\": {\r",
+									"        \"type\": \"string\"\r",
+									"      }\r",
+									"    },\r",
+									"    \"required\": [\r",
+									"      \"id\",\r",
+									"      \"user_id\",\r",
+									"      \"title\",\r",
+									"      \"body\"\r",
+									"    ]\r",
+									"  }\r",
+									"}\r",
+									"pm.variables.set(\"schema\", schema)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://gorest.co.in/public/v2/posts",
+							"protocol": "https",
+							"host": [
+								"gorest",
+								"co",
+								"in"
+							],
+							"path": [
+								"public",
+								"v2",
+								"posts"
+							]
+						}
+					},
+					"response": []
 				}
 			],
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
 					}
 				},
-				"url": {
-					"raw": "{{baseUrl}}{{id}}",
-					"host": [
-						"{{baseUrl}}{{id}}"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Get deleted user",
-			"event": [
 				{
 					"listen": "test",
 					"script": {
+						"type": "text/javascript",
 						"exec": [
-							"pm.test(\"Check Status code is 404\", function () {\r",
-							"    pm.response.to.have.status(404);\r",
-							"});\r",
-							"var response = pm.response.json();\r",
-							"\r",
-							"pm.test(\"Check Content-Type is present\", function () {\r",
-							"    pm.response.to.have.header(\"Content-Type\");\r",
-							"});\r",
-							"pm.test(\"Check response length\", function () {\r",
-							"    pm.expect(response.message).to.equal(\"Resource not found\");\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{baseUrl}}{{id}}",
-					"host": [
-						"{{baseUrl}}{{id}}"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Get posts",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
-							"});\r",
-							"var response = pm.response.json();\r",
-							"\r",
-							"pm.test(\"Check response's body length\", function () {\r",
-							"    response.forEach(el => pm.expect(Object.keys(el)).to.have.length(4))\r",
-							"});\r",
-							"pm.test(\"Check response's body length\", function () {\r",
-							"    pm.expect(response).to.have.length(10)\r",
-							"});\r",
 							""
-						],
-						"type": "text/javascript"
+						]
 					}
 				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "https://gorest.co.in/public/v2/posts",
-					"protocol": "https",
-					"host": [
-						"gorest",
-						"co",
-						"in"
-					],
-					"path": [
-						"public",
-						"v2",
-						"posts"
-					]
-				}
-			},
-			"response": []
+			]
 		}
 	],
 	"auth": {
@@ -444,7 +814,23 @@
 			"script": {
 				"type": "text/javascript",
 				"exec": [
-					""
+					"const chai = require('chai')",
+					"chai.config.truncateThreshold = 200",
+					"//declaring commonTests as a variable with the 5 test assertions",
+					"const commonTests = `",
+					"pm.test('Response status code is 200 or 201', function () {",
+					"    pm.expect(pm.response.code).to.be.oneOf([200, 201])",
+					"})",
+					"pm.test('Response time is less than 500ms', function () {",
+					"    pm.expect(pm.response.responseTime).to.be.below(3000)",
+					"})",
+					"pm.test('Response body is not empty', function () {",
+					"    pm.response.to.be.json.and.not.an('array')",
+					"    pm.expect(pm.response.json()).to.not.be.null;",
+					"    pm.expect(pm.response.json()).to.not.be.undefined;",
+					"});",
+					"`",
+					"pm.environment.set(\"commonTests\", commonTests);"
 				]
 			}
 		},
@@ -469,25 +855,24 @@
 			"type": "string"
 		},
 		{
+			"key": "schema",
+			"value": ""
+		},
+		{
 			"key": "userName",
-			"value": "Ondra Zbyshek"
+			"value": ""
 		},
 		{
 			"key": "email",
-			"value": "asas@mail.com"
+			"value": ""
 		},
 		{
 			"key": "patchedUserName",
-			"value": "Ondra Zloshek"
+			"value": ""
 		},
 		{
 			"key": "patchedEmail",
-			"value": "sa@mail.com"
-		},
-		{
-			"key": "newUser",
-			"value": "",
-			"type": "string"
+			"value": ""
 		}
 	]
 }
